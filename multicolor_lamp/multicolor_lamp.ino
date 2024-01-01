@@ -1,3 +1,9 @@
+/**
+ * This is project n. 4 into the Arduino starter kit manual.
+ *
+ * Author: Michele De Stefano
+ */
+
 static uint8_t const
 
   IN_R_PIN = A0

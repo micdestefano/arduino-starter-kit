@@ -1,3 +1,9 @@
+/**
+ * This is project n. 3 into the Arduino starter kit manual.
+ *
+ * Author: Michele De Stefano
+ */
+
 static uint8_t const switch_pin = 2;
 static uint8_t const green_pin = 3;
 static uint8_t const red_pin = 4;

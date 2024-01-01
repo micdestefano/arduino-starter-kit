@@ -1,6 +1,7 @@
 /**
- * An object-oriented version of the code that switches leds on depending on the
- * measured temperature.
+ * An object-oriented version of the code that switches leds depending
+ * on the measured temperature. This is project n. 2 into the Arduino
+ * starter kit manual.
  *
  * Author: Michele De Stefano
  */
