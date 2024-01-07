@@ -36,13 +36,14 @@
  *
  * Given that Rd = 10k (typical value for the pulldow resistor), we can
  * compute the desired values for Ri. The desired values are:
- *   - R2 = 3.22k
+ *   - R2 = 3.33k
  *   - R3 = 10k
  *   - R4 = 30k
  *
  * With the available resistors in the kit I could get close to these values
  * by doing the following:
- *   - R2: series of 3 1k resistors + 1 220 ohm resistor
+ *   - R2: series of 3 1k resistors + 1 220 ohm resistor (3.22k, that ends up
+ *     into Vin/Vcc = 0.76)
  *   - R3: simply use one 10k resistor
  *   - R4: series of 3 10k resistors.
  *
