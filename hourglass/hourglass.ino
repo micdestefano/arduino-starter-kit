@@ -14,7 +14,6 @@
 
 // The following global constants tune the behavior of the hourglass
 static uint8_t const NUM_LEDS = 6;
-static uint8_t const MAX_LED_INDEX = NUM_LEDS - 1;
 static const uint8_t LED_PINS[NUM_LEDS] = {2, 3, 4, 5, 6, 7};
 static uint8_t const SWITCH_PIN = 10;
 
@@ -40,19 +39,17 @@ public:
 
   void reset() override {
     set_all_leds_to(LOW);
-    m_led_idx = -1;
+    m_led_idx = 0;
     m_last_time_record = millis();
   }
 
   bool step() override {
     unsigned long const cur_time = millis();
-    if (cur_time - m_last_time_record > LED_INTERVAL_MILLIS) {
-      // NOTE: The following max is a safety measure for not incurring in segmentation faults
-      m_led_idx = max(m_led_idx + 1, MAX_LED_INDEX);
-      digitalWrite(LED_PINS[m_led_idx], HIGH);
+    if (cur_time - m_last_time_record > LED_INTERVAL_MILLIS && m_led_idx < NUM_LEDS) {
+      digitalWrite(LED_PINS[m_led_idx++], HIGH);
       m_last_time_record = cur_time;
     }
-    return m_led_idx == MAX_LED_INDEX;
+    return m_led_idx == NUM_LEDS;
   }
 
 private:
@@ -136,11 +133,9 @@ private:
 static StateMachine state_machine;
 
 void setup() {
-  // put your setup code here, to run once:
   state_machine.setup();
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
   state_machine.step();
 }
