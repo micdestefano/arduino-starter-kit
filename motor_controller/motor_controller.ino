@@ -5,10 +5,10 @@
  * an analog input from the potentiometer.
  *
  * In the software implementation I am using the "Observer design
- * pattern": the observer is observing the switch, while the
+ * pattern": the observer is observing the pushbutton, while the
  * observed object is the motor controller. Each press to the
- * switch toggles the motor on and off. The potentiometer controls
- * the speed.
+ * pushbutton toggles the motor on and off.
+ * The potentiometer controls the speed.
  *
  * Author: Michele De Stefano
  */
