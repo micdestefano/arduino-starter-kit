@@ -138,7 +138,7 @@ private:
     m_pause_len[FULL]   = full_millis;
     m_pause_len[HALF]   = full_millis >> 1;
     m_pause_len[DOUBLE] = full_millis << 1;
-    m_pause_tol = round(full_millis * 0.15);
+    m_pause_tol = round(full_millis * 0.25);
     Serial.print("HALF (ms): "); Serial.println(m_pause_len[HALF]);
     Serial.print("FULL (ms): "); Serial.println(m_pause_len[FULL]);
     Serial.print("DOUBLE (ms): "); Serial.println(m_pause_len[DOUBLE]);
