@@ -14,9 +14,12 @@
  *
  * I am using again the observer design pattern.
  *
- * NOTE: I notiched that the piezo is not so sensitive to light knocks.
+ * NOTE: I noticed that the piezo is not so sensitive to light knocks.
  * I had to knock on the breadboard or on the piezo itself. It is better
  * not to knock on the piezo, for not risking to damage it.
+ *
+ * Here is a link to a video showing how it works:
+ * https://youtu.be/AiqKzhbjb60
  *
  * Author: Michele De Stefano
  */
