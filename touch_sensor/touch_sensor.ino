@@ -20,6 +20,8 @@
  * charge time, but the unit of that integer is
  * completely arbitrary.
  *
+ * Video of my implementation: https://www.youtube.com/watch?v=-WlKmOLo8Bo
+ *
  * Author: Michele De Stefano
  */
 #include <CapacitiveSensor.h>
