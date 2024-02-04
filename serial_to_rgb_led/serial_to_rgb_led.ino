@@ -56,10 +56,16 @@ class ColorReceiver {
 public:
 
   Color const& recv_color() {
+    Serial.println("Receiving data ...");
     char* color_ptr = reinterpret_cast<char*>(&m_color);
     for (uint8_t read_bytes = 0; read_bytes < k_data_size; read_bytes = color_ptr - reinterpret_cast<char*>(&m_color)) {
       color_ptr += Serial.readBytes(color_ptr, k_data_size - read_bytes);
     }
+    Serial.print("Data received (R, G, B): (");
+    Serial.print(m_color.R); Serial.print(", ");
+    Serial.print(m_color.G); Serial.print(", ");
+    Serial.print(m_color.B);
+    Serial.println(")");
     return m_color;
   }
 
@@ -70,7 +76,7 @@ private:
   Color                 m_color;
 };
 
-static LEDController  led_controller(9, 10, 11);
+static LEDController  led_controller(11, 9, 10);
 static ColorReceiver  receiver;
 
 void setup() {
