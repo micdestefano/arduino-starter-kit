@@ -108,7 +108,20 @@ private:
 
   unsigned int select_tone(int quantized_tone) {
     long const encoded_tone = map(quantized_tone, 0, 1023, 0, 10);
+    /*
+     * NOTE: Use the following if you use the 3.3V source instead of the standard 5V one
+     * This is because in that case the maximum voltage recorded is 3.3V, which theoretically
+     * corresponds to a maximum A0 recording of 3.3/5 * 1023 = 675.18, which we can round to 680.
+     * Experimentally I see also values up to 690 or 691, so you can put 690 instead of 680 and
+     * the circuit works in any case.
+     */
+    //long const encoded_tone = map(quantized_tone, 0, 680, 0, 10);
+
     // === Debug info ===
+    Serial.print("quantized_tone:");
+    Serial.println(quantized_tone);
+    // The following line is here for debugging purpose
+    //delay(500);
     Serial.print("encoded_tone:");
     Serial.println(encoded_tone);
     // ==================
