@@ -65,6 +65,27 @@
  * an integer (long) value. For this reason I decided to remap the values between
  * 0 and 10. The remapped value (encoded_tone) is visible in the third column above.
  *
+ * ======================================================================
+ * Update (2026-05-03): I bought new resistors. The new configuration is
+ *   - R2 = 3.33k
+ *   - R3 = 10k
+ *   - R4 = 33.3k
+ *
+ * With these resistors the voltage division read in A0 is nearly perfect.
+ *
+ * Because here we have 4 tones, I also decided to remap the analog input into
+ * a range that is a multiple of 4. Here I used 8.
+ *
+ *      Pressed switch  |   Vin / Vcc |  encoded_tone = (int)(8 * Vin/Vcc)
+ *      -------------------------------------------------------------------
+ *             1        |     1.00    |                 8
+ *             2        |     0.75    |                 6
+ *             3        |     0.50    |                 4 (but I usually read 3 on the serial print)
+ *             4        |     0.23    |                 1
+ *          no press    |     0.00    |                 0
+ *
+ * ========================================================================
+ *
  * The implementation below is quite precise and conservative. I did not
  * experience any fluctuation on the produced tone.
  *
@@ -104,10 +125,10 @@ private:
     F = 349
   };
 
-  static unsigned int const k_mapped_tones[11];
+  static unsigned int const k_mapped_tones[9];
 
   unsigned int select_tone(int quantized_tone) {
-    long const encoded_tone = map(quantized_tone, 0, 1023, 0, 10);
+    long const encoded_tone = map(quantized_tone, 0, 1023, 0, 8);
     /*
      * NOTE: Use the following if you use the 3.3V source instead of the standard 5V one
      * This is because in that case the maximum voltage recorded is 3.3V, which theoretically
@@ -115,7 +136,7 @@ private:
      * Experimentally I see also values up to 690 or 691, so you can put 690 instead of 680 and
      * the circuit works in any case.
      */
-    //long const encoded_tone = map(quantized_tone, 0, 680, 0, 10);
+    //long const encoded_tone = map(quantized_tone, 0, 680, 0, 8);
 
     // === Debug info ===
     Serial.print("quantized_tone:");
@@ -135,7 +156,7 @@ private:
  * and safely remaps different codes to the same frequency. Notice that this remapping
  * will work also if we use R2 = 3.22k.
  */
-unsigned int const KeyboardManager::k_mapped_tones[11] = {NONE, F, F, F, E, E, D, D, D, C, C};
+unsigned int const KeyboardManager::k_mapped_tones[9] = {NONE, F, F, E, E, D, D, C, C};
 
 static KeyboardManager keyboard;
 
