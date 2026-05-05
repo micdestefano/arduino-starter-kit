@@ -20,7 +20,7 @@
  *          through a 2.2k resistor. The resistor protects the board by not
  *          allowing too much current to flow from pin 18.
  *  - collector: connect it to the negative pin of the buzzer (actually the
- *          buzzer has no polarity).
+ *          buzzer has a polarity and you need to connect it properly!).
  *
  * Then, connect the other pin of the buzzer to the 5V source.
  */
