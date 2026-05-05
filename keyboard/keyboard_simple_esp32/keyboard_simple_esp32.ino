@@ -33,10 +33,15 @@ void setup() {
   
   // This sets up analog read with the same number of bits used by Arduino UNO R3 (by default this uses 12 bits)
   analogReadResolution(10);
+
+  // We could use ledcAttach and ledcWriteTone (more precise), but the final effect is the same (verified experimentally)
 }
+
+int lastTone = 0;
 
 void loop() {
   int a0_input = analogRead(analogPin);
+  int currentTone = 0;
 
   int DO = 262;
   int RE = 294;
@@ -47,14 +52,23 @@ void loop() {
   Serial.println(a0_input);
 
   if (a0_input < 100) {
-    noTone(buzzerPin);
+    currentTone = 0;
   } else if (a0_input >= 100 && a0_input < 300) {
-    tone(buzzerPin, DO);
+    currentTone = DO;
   } else if (a0_input >= 300 && a0_input < 600) {
-    tone(buzzerPin, RE);
+    currentTone = RE;
   } else if (a0_input >= 700 && a0_input < 1000) { 
-    tone(buzzerPin, MI);
+    currentTone = MI;
   } else {
-    tone(buzzerPin, FA);
+    currentTone = FA;
+  }
+
+  if (currentTone != lastTone) {
+    if (currentTone == 0) {
+      noTone(buzzerPin);
+    } else {
+      tone(buzzerPin, currentTone);
+    }
+    lastTone = currentTone;
   }
 }
